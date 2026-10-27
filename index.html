@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Syakira | Catatan Hangat & Apresiasi ✨</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        champagne: '#F7EBE1',
+                        warmbeige: '#F4ECE1',
+                        rosegold: '#C88A75',
+                        deeprose: '#8C4A3E',
+                        softgold: '#D4A373',
+                        warmslate: '#4A403A',
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #FAF4EF 0%, #F4ECE1 50%, #EFE3D3 100%);
+            min-height: 100vh;
+            color: #4A403A;
+        }
+
+        .font-serif-title {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .floating-sparkle {
+            position: absolute;
+            pointer-events: none;
+            animation: floatSlow 8s ease-in-out infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 0.7;
+            }
+        }
+
+        #evasiveBtn {
+            position: relative;
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F4ECE1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C88A75;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4 relative min-h-screen overflow-x-hidden">
+
+    <!-- Audio Soundtrack (Musik Latar Belakang) -->
+    <!-- Ganti URL pada atribut 'src' dengan link file MP3 pilihanmu atau file lokal (misal: "musik.mp3") -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="nyaman.mp3" type="audio/ogg">
+        <source src="nyaman.MP3" type="audio/mpeg">
+        Browsermu tidak mendukung elemen audio.
+    </audio>
+
+    <!-- Floating Sparkles Background -->
+    <div id="sparkle-container" class="fixed inset-0 overflow-hidden pointer-events-none z-0"></div>
+
+    <!-- Music Control Floating Button -->
+    <button id="musicToggle" onclick="toggleMusic()" class="fixed top-5 right-5 z-50 bg-white/70 backdrop-blur-md p-3 rounded-full shadow-md border border-rosegold/30 text-rosegold hover:bg-rosegold hover:text-white transition-all duration-300 flex items-center justify-center w-11 h-11" title="Putar/Hentikan Musik">
+        <i id="musicIcon" class="fas fa-music text-base"></i>
+    </button>
+
+    <!-- Main Container Card -->
+    <main class="relative z-10 w-full max-w-lg bg-white/80 backdrop-blur-md rounded-3xl shadow-xl border border-white/80 p-6 md:p-8 my-6 text-warmslate">
+
+        <!-- INTRO STEP: Sapaan Awal & Tombol Kabur -->
+        <div id="introStep" class="space-y-6 text-center">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-champagne text-rosegold mb-1 shadow-inner">
+                <i class="fas fa-feather-pointed text-2xl"></i>
+            </div>
+            
+            <h1 class="text-3xl md:text-4xl font-semibold font-serif-title text-deeprose tracking-wide">
+                Hallo Syakira ✨
+            </h1>
+
+            <p class="text-slate-600 text-sm md:text-base leading-relaxed font-normal px-2">
+                Ada sedikit cerita dan ungkapan apresiasi hangat yang ingin kubagikan padamu hari ini. Tanpa paksaan, santai saja... Maukah kamu meluangkan sebentar waktumu untuk membacanya?
+            </p>
+
+            <div class="p-4 bg-warmbeige/50 rounded-2xl border border-rosegold/20 text-xs text-warmslate/80 italic">
+                "Setiap momen bersamamu selalu terasa menenangkan."
+            </div>
+
+            <!-- Interaktif Choice Buttons -->
+            <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center items-center relative min-h-[110px]">
+                <button onclick="startJourney()" class="w-full sm:w-auto px-7 py-3.5 bg-gradient-to-r from-rosegold to-softgold text-white font-medium rounded-2xl shadow-md hover:opacity-95 transition transform hover:scale-[1.02] flex items-center justify-center gap-2">
+                    <i class="fas fa-book-open text-xs"></i> Mau Baca ❤️
+                </button>
+                
+                <button id="evasiveBtn" onmouseenter="dodgeButton()" onclick="dodgeButton()" class="w-full sm:w-auto px-6 py-3.5 bg-slate-200/80 text-slate-600 font-medium rounded-2xl shadow-sm text-sm cursor-pointer select-none border border-slate-300">
+                    Belum Mau 😜
+                </button>
+            </div>
+        </div>
+
+        <!-- READER CONTAINER (BAB 1 - 7) -->
+        <div id="readerStep" class="hidden space-y-6">
+            
+            <!-- Header Progress Bar -->
+            <div class="space-y-2">
+                <div class="flex justify-between items-center text-xs font-medium text-rosegold tracking-wider uppercase">
+                    <span id="chapterTitle">BAB 1 DARI 7</span>
+                    <span id="chapterProgress">14%</span>
+                </div>
+                <div class="w-full h-1.5 bg-champagne rounded-full overflow-hidden">
+                    <div id="progressBar" class="h-full bg-gradient-to-r from-rosegold to-softgold transition-all duration-500 rounded-full" style="width: 14%;"></div>
+                </div>
+            </div>
+
+            <!-- Content Card Box -->
+            <div class="bg-gradient-to-b from-champagne/30 to-white/60 p-6 rounded-2xl border border-rosegold/20 shadow-sm min-h-[280px] flex flex-col justify-between">
+                <div id="chapterContent" class="space-y-4 text-slate-700 text-sm md:text-base leading-relaxed">
+                    <!-- Dynamic content filled by JS -->
+                </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <div class="flex justify-between items-center pt-2 gap-3">
+                <button id="prevBtn" onclick="changeChapter(-1)" class="px-4 py-2.5 bg-warmbeige hover:bg-champagne text-warmslate text-xs font-semibold rounded-xl transition border border-rosegold/20 flex items-center gap-2">
+                    <i class="fas fa-arrow-left"></i> Sebelumnya
+                </button>
+                
+                <button id="nextBtn" onclick="changeChapter(1)" class="px-6 py-2.5 bg-gradient-to-r from-rosegold to-softgold hover:opacity-90 text-white text-xs font-semibold rounded-xl transition shadow-sm flex items-center gap-2">
+                    Lanjut <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- JavaScript Logic -->
+    <script>
+        const chapters = [
+            {
+                bab: "BAB 1",
+                title: "Hallo Syakira & Ruang Nyaman",
+                content: `
+                    <h3 class="text-xl font-semibold font-serif-title text-deeprose mb-2">Awal Mula yang Menenangkan</h3>
+                    <p>Hallo Syakira, pertama-tama terima kasih ya sudah bersedia membaca catatan kecil ini. Aku hanya ingin menyampaikan rasa syukur atas hadirnya dirimu.</p>
+                    <p class="mt-2">Sejak awal mengenalmu, ada atmosfer hangat dan nyaman yang jarang aku temui pada orang lain. Kehadiranmu membawa warna tersendiri yang membuat hari-hari biasa terasa jauh lebih berarti.</p>
+                `
+            },
+            {
+                bab: "BAB 2",
+                title: "Sederhana Namun Berkesan",
+                content: `
+                    <h3 class="text-xl font-semibold font-serif-title text-deeprose mb-2">Momen-Momen Kecil Bersamamu</h3>
+                    <p>Mungkin bagimu hal itu biasa saja, tapi bagiku obrolan santai, tawa kecilmu, dan caramu merespon hal-hal sederhana selalu berhasil mencerahkan suasana.</p>
+                    <p class="mt-2">Aku sangat mengagumi caramu berpikir dan kebaikan hatimu. Tanpa perlu menjadi orang lain, kamu selalu tampak begitu anggun dan autentik saat menjadi dirimu sendiri.</p>
+                `
+            },
+            {
+                bab: "BAB 3",
+                title: "Menghargai Ruang & Keyakinan",
+                content: `
+                    <h3 class="text-xl font-semibold font-serif-title text-deeprose mb-2">Dewasa dalam Perbedaan</h3>
+                    <p>Aku menyadari penuh adanya perbedaan jalan dan keyakinan di antara kita. Dan bagiku, perbedaan itu bukanlah sebuah halangan untuk saling menghargai.</p>
+                    <p class="mt-2">Rasa hormatku padamu sangat besar. Aku tidak pernah bermaksud memaksakan keadaan atau menuntut sesuatu yang melampaui kenyamananmu. Prinsip dan keyakinanmu adalah hal indah yang akan selalu kuhormati.</p>
+                `
+            },
+            {
+                bab: "BAB 4",
+                title: "Tidak Ada Tekanan",
+                content: `
+                    <h3 class="text-xl font-semibold font-serif-title text-deeprose mb-2">Ruang Aman Tanpa Beban</h3>
+                    <p>Syakira, tulisan ini sama sekali bukan tuntutan status, bukan ungkapan 'nembak', ataupun beban yang harus kamu jawab dengan serba salah.</p>
+                    <p class="mt-2">Ini murni tempat aman di mana kamu tahu bahwa ada seseorang yang mengapresiasimu apa adanya. Kamu tidak perlu merasa canggung atau serba salah setelah membaca ini.</p>
+                `
+            },
+            {
+                bab: "BAB 5",
+                title: "Kehangatan di Tengah Kesibukan",
+                content: `
+                    <h3 class="text-xl font-semibold font-serif-title text-deeprose mb-2">Selalu Ada Dukungan Tulus</h3>
+                    <p>Di tengah padatnya rutinitas, lelahnya aktivitas, atau saat harimu terasa berat, ingatlah bahwa kamu punya teman cerita yang selalu siap mendengarkan.</p>
+                    <p class="mt-2">Tanpa perlu dihakimi atau dituntut, aku akan selalu mendukung langkah-langkah positifmu dari dekat maupun dalam diam.</p>
+                `
+            },
+            {
+                bab: "BAB 6",
+                title: "Berjalan Tanpa Terburu-buru",
+                content: `
+                    <h3 class="text-xl font-semibold font-serif-title text-deeprose mb-2">Membiarkan Semuanya Mengalir</h3>
+                    <p>Tidak ada yang perlu terburu-buru dalam menjalani waktu. Nikmati setiap proses dalam hidupmu, raih mimpimu setinggi-tingginya, dan jadilah versi terbaik dari dirimu.</p>
+                    <p class="mt-2">Jika suatu saat kamu butuh tempat sekadar untuk bertukar pikiran atau berbagi cerita ringan, pintu ini akan selalu terbuka untukmu.</p>
+                `
+            },
+            {
+                bab: "BAB 7",
+                title: "Terima Kasih & Apresiasi",
+                content: `
+                    <h3 class="text-xl font-semibold font-serif-title text-deeprose mb-2">Catatan Akhir yang Hangat</h3>
+                    <p>Terima kasih ya, Syakira, sudah meluangkan waktu untuk membaca sampai bab terakhir ini. Semoga hari-harimu selalu dilingkupi kebahagiaan, ketenangan, dan berkah.</p>
+                    <p class="mt-2">Tetaplah menjadi pribadi yang hebat dan menginspirasi. <em>Have a wonderful day!</em> ✨</p>
+                `
+            }
+        ];
+
+        let currentChapterIndex = 0;
+        const bgMusic = document.getElementById('bgMusic');
+
+        function startJourney() {
+            // Putar musik otomatis saat tombol "Mau Baca" ditekan (mengatasi kebijakan autoplay browser)
+            bgMusic.play().then(() => {
+                updateMusicIcon(true);
+            }).catch(e => {
+                console.log("Autoplay dicegah oleh browser, gunakan tombol musik manual.");
+            });
+
+            document.getElementById('introStep').classList.add('hidden');
+            document.getElementById('readerStep').classList.remove('hidden');
+            renderChapter();
+            triggerConfetti();
+        }
+
+        function changeChapter(direction) {
+            currentChapterIndex += direction;
+            if (currentChapterIndex < 0) {
+                currentChapterIndex = 0;
+            } else if (currentChapterIndex >= chapters.length) {
+                currentChapterIndex = chapters.length - 1;
+                triggerConfetti();
+            }
+            renderChapter();
+        }
+
+        function renderChapter() {
+            const chap = chapters[currentChapterIndex];
+            const total = chapters.length;
+            
+            document.getElementById('chapterTitle').innerText = `${chap.bab} DARI ${total} — ${chap.title}`;
+            
+            const progressPercent = Math.round(((currentChapterIndex + 1) / total) * 100);
+            document.getElementById('chapterProgress').innerText = `${progressPercent}%`;
+            document.getElementById('progressBar').style.width = `${progressPercent}%`;
+
+            document.getElementById('chapterContent').innerHTML = chap.content;
+
+            document.getElementById('prevBtn').style.visibility = currentChapterIndex === 0 ? 'hidden' : 'visible';
+            
+            const nextBtn = document.getElementById('nextBtn');
+            if (currentChapterIndex === total - 1) {
+                nextBtn.innerHTML = `Selesai <i class="fas fa-heart"></i>`;
+            } else {
+                nextBtn.innerHTML = `Lanjut <i class="fas fa-arrow-right"></i>`;
+            }
+        }
+
+        function dodgeButton() {
+            const btn = document.getElementById('evasiveBtn');
+            const randomX = (Math.random() - 0.5) * 160;
+            const randomY = (Math.random() - 0.5) * 80;
+            btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+
+        function triggerConfetti() {
+            confetti({
+                particleCount: 80,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#C88A75', '#D4A373', '#F7EBE1', '#8C4A3E']
+            });
+        }
+
+        // Generate Floating Sparkles
+        window.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('sparkle-container');
+            const sparkleCount = 15;
+            for (let i = 0; i < sparkleCount; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'floating-sparkle fas fa-sparkles text-rosegold/20';
+                sparkle.style.top = `${Math.random() * 100}%`;
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.fontSize = `${Math.random() * 12 + 10}px`;
+                sparkle.style.animationDuration = `${Math.random() * 6 + 6}s`;
+                sparkle.style.animationDelay = `${Math.random() * 3}s`;
+                container.appendChild(sparkle);
+            }
+        });
+
+        // Toggle kontrol musik manual lewat ikon di pojok kanan atas
+        function toggleMusic() {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                updateMusicIcon(true);
+            } else {
+                bgMusic.pause();
+                updateMusicIcon(false);
+            }
+        }
+
+        function updateMusicIcon(isPlaying) {
+            const icon = document.getElementById('musicIcon');
+            if (isPlaying) {
+                icon.classList.remove('fa-volume-mute');
+                icon.classList.add('fa-music', 'animate-pulse');
+            } else {
+                icon.classList.remove('fa-music', 'animate-pulse');
+                icon.classList.add('fa-volume-mute');
+            }
+        }
+    </script>
+</body>
+</html>
