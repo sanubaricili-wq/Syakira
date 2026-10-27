@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Untuk Syakira | Catatan Hangat & Apresiasi ✨</title>
+    <title>Untuk SYAKIRA | Catatan Hangat & Apresiasi ✨</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Canvas Confetti -->
@@ -84,10 +84,9 @@
 <body class="flex items-center justify-center p-4 relative min-h-screen overflow-x-hidden">
 
     <!-- Audio Soundtrack (Musik Latar Belakang) -->
-    <!-- Ganti URL pada atribut 'src' dengan link file MP3 pilihanmu atau file lokal (misal: "musik.mp3") -->
     <audio id="bgMusic" loop preload="auto">
-        <source src="nyaman.mp3" type="audio/ogg">
-        <source src="nyaman.MP3" type="audio/mpeg">
+        <source src="nyaman.mp3" type="audio/mpeg">
+        <source src="nyaman.ogg" type="audio/ogg">
         Browsermu tidak mendukung elemen audio.
     </audio>
 
@@ -109,7 +108,7 @@
             </div>
             
             <h1 class="text-3xl md:text-4xl font-semibold font-serif-title text-deeprose tracking-wide">
-                Hallo Syakira ✨
+                Hallo <span class="text-pink-500 font-bold tracking-wider">SYAKIRA</span> ✨
             </h1>
 
             <p class="text-slate-600 text-sm md:text-base leading-relaxed font-normal px-2">
@@ -173,10 +172,10 @@
         const chapters = [
             {
                 bab: "BAB 1",
-                title: "Hallo Syakira & Ruang Nyaman",
+                title: "Hallo SYAKIRA & Ruang Nyaman",
                 content: `
                     <h3 class="text-xl font-semibold font-serif-title text-deeprose mb-2">Awal Mula yang Menenangkan</h3>
-                    <p>Hallo Syakira, pertama-tama terima kasih ya sudah bersedia membaca catatan kecil ini. Aku hanya ingin menyampaikan rasa syukur atas hadirnya dirimu.</p>
+                    <p>Hallo <span class="text-pink-500 font-bold">SYAKIRA</span>, pertama-tama terima kasih ya sudah bersedia membaca catatan kecil ini. Aku hanya ingin menyampaikan rasa syukur atas hadirnya dirimu.</p>
                     <p class="mt-2">Sejak awal mengenalmu, ada atmosfer hangat dan nyaman yang jarang aku temui pada orang lain. Kehadiranmu membawa warna tersendiri yang membuat hari-hari biasa terasa jauh lebih berarti.</p>
                 `
             },
@@ -203,7 +202,7 @@
                 title: "Tidak Ada Tekanan",
                 content: `
                     <h3 class="text-xl font-semibold font-serif-title text-deeprose mb-2">Ruang Aman Tanpa Beban</h3>
-                    <p>Syakira, tulisan ini sama sekali bukan tuntutan status, bukan ungkapan 'nembak', ataupun beban yang harus kamu jawab dengan serba salah.</p>
+                    <p><span class="text-pink-500 font-bold">SYAKIRA</span>, tulisan ini sama sekali bukan tuntutan status, bukan ungkapan 'nembak', ataupun beban yang harus kamu jawab dengan serba salah.</p>
                     <p class="mt-2">Ini murni tempat aman di mana kamu tahu bahwa ada seseorang yang mengapresiasimu apa adanya. Kamu tidak perlu merasa canggung atau serba salah setelah membaca ini.</p>
                 `
             },
@@ -230,8 +229,14 @@
                 title: "Terima Kasih & Apresiasi",
                 content: `
                     <h3 class="text-xl font-semibold font-serif-title text-deeprose mb-2">Catatan Akhir yang Hangat</h3>
-                    <p>Terima kasih ya, Syakira, sudah meluangkan waktu untuk membaca sampai bab terakhir ini. Semoga hari-harimu selalu dilingkupi kebahagiaan, ketenangan, dan berkah.</p>
+                    <p>Terima kasih ya, <span class="text-pink-500 font-bold">SYAKIRA</span>, sudah meluangkan waktu untuk membaca sampai bab terakhir ini. Semoga hari-harimu selalu dilingkupi kebahagiaan, ketenangan, dan berkah.</p>
                     <p class="mt-2">Tetaplah menjadi pribadi yang hebat dan menginspirasi. <em>Have a wonderful day!</em> ✨</p>
+                    
+                    <!-- Penutup Nama Sanubari Hulu & Emoticon Anjing di Kanan Bawah -->
+                    <div class="mt-6 pt-4 text-right border-t border-rosegold/20">
+                        <p class="text-xs text-slate-500 italic">Salam hangat dari,</p>
+                        <p class="text-base font-semibold font-serif-title text-deeprose tracking-wide mt-0.5">Sanubari Hulu 🐶</p>
+                    </div>
                 `
             }
         ];
@@ -240,7 +245,7 @@
         const bgMusic = document.getElementById('bgMusic');
 
         function startJourney() {
-            // Putar musik otomatis saat tombol "Mau Baca" ditekan (mengatasi kebijakan autoplay browser)
+            // Putar musik otomatis saat tombol "Mau Baca" ditekan
             bgMusic.play().then(() => {
                 updateMusicIcon(true);
             }).catch(e => {
@@ -298,7 +303,7 @@
                 particleCount: 80,
                 spread: 70,
                 origin: { y: 0.6 },
-                colors: ['#C88A75', '#D4A373', '#F7EBE1', '#8C4A3E']
+                colors: ['#EC4899', '#C88A75', '#D4A373', '#8C4A3E']
             });
         }
 
